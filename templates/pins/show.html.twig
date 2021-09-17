@@ -5,5 +5,5 @@
 {% block body %}
         <h2>{{ pin.description }}</h2>
         <p>{{ pin.description }}</p>
-        <p><a href="{{ path("app_pins_edit",{id: pin.id})}}">Edit</a> | <a href="{{ path("app_home") }}">Go back</a></p>
+        <p><a href="{{ path("app_pins_edit",{id: pin.id})}}">Edit</a> | <a href="{{ path("app_pinns_delete",{id: pin.id}) }}">Go back</a>< | <a href="{{ path("app_home") }}">Go back</a></p>
 {% endblock %}

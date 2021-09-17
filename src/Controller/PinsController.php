@@ -9,9 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PinRepository;
 use App\Entity\Pin;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use App\Form\PinType;
 class PinsController extends AbstractController
 {
     /**
@@ -24,16 +22,12 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
     }
 
     /**
-     * @Route("/pins/create", name="app_pins_create")
+     * @Route("/pins/create", name="app_pins_create",methods={"GET","POST"})
      */
     public function create(Request $req,EntityManagerInterface $em):Response
     {
         $pin =new Pin;
-        $form= $this->createFormBuilder($pin)
-        ->add("title",TextType::class)
-        ->add("description",TextareaType::class)
-        ->getForm()
-        ;
+        $form= $this->createForm(PinType::class,$pin,['method' => 'POST']);
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid())
         {
@@ -50,15 +44,11 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
 
 
     /**
-     * @Route("/pins//edit/{id<[0-9]+>}", name="app_pins_edit")
+     * @Route("/pins/edit/{id<[0-9]+>}", name="app_pins_edit",methods={"GET","POST"})
      */
     public function edit(Request $req,Pin $pin,EntityManagerInterface $em):Response
     {
-        $form= $this->createFormBuilder($pin)
-        ->add("title",TextType::class)
-        ->add("description",TextareaType::class)
-        ->getForm()
-        ;
+        $form= $this->createForm(PinType::class,$pin,['method' => 'POST']);
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid())
         {
