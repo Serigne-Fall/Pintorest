@@ -41,6 +41,13 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
         ]);
 
     }
+    /**
+     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show")
+     */
+    public function show(Pin $pin):Response
+    {
+        return $this->render("pins/show.html.twig",compact("pin"));
+    }
 
 
     /**
@@ -57,17 +64,26 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
             return $this->redirectToRoute("app_home");
         }
         return $this->render("pins/edit.html.twig",[
-            "monFormulaireEdit"=>$form->createView(),
+            "monFormulaire"=>$form->createView(),
             "pin"=>$pin
         ]);
 
+
     }
+
+
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show")
+     * @Route("/pins/delete/{id<[0-9]+>}", name="app_pins_delete",methods={"GET","POST","DELETE "})
      */
-    public function show(Pin $pin):Response
+    public function delete(Request $req,Pin $pin,EntityManagerInterface $em):Response
     {
-        return $this->render("pins/show.html.twig",compact("pin"));
+        if($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(),$req->request->get("csrf_token"))){
+            $em->remove($pin);
+            $em->flush();
+        }
+        return $this->redirectToRoute("app_home");
     }
+
+    
 
 }
