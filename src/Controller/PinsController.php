@@ -33,7 +33,8 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
         {
             $em->persist($pin);
             $em->flush();
-
+            
+            $this->addFlash('success','pin created successFully');
             return $this->redirectToRoute("app_home");
         }
         return $this->render("pins/create.html.twig",[
@@ -60,7 +61,7 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
         if($form->isSubmitted() && $form->isValid())
         {
             $em->flush();
-
+            $this->addFlash('info','pin updated successFully');
             return $this->redirectToRoute("app_home");
         }
         return $this->render("pins/edit.html.twig",[
@@ -81,6 +82,7 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
             $em->remove($pin);
             $em->flush();
         }
+        $this->addFlash('error','pin deleted successFully');
         return $this->redirectToRoute("app_home");
     }
 
