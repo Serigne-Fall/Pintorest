@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-body {
-    background-color: lightgray;
-}
+@import "~bootstrap/scss/bootstrap";
+
 html,body{
     font-family: 'Montserrat', sans-serif;
 }
