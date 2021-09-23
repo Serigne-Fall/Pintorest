@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+
 class PinType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -18,8 +19,8 @@ class PinType extends AbstractType
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Delete',
-                'download_label' => 'Telecharger',
-                'download_uri' => true,
+                'imagine_pattern' => 'squared_thumbnail_small',
+                'download_uri' => false,
             ])
             ->add('title')
             ->add('description')
