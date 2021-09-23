@@ -10,3 +10,13 @@ import $ from 'jquery';
 import './scss/app.scss';
 // start the Stimulus application
 import './bootstrap';
+
+document.querySelector(".custom-file-input").addEventListener('change',function(e){
+    console.log(e.currentTarget);
+    let inputFile=e.currentTarget;
+    console.log(inputFile.files[0].name)
+    document.querySelector('.custom-file-label').innerHTML=inputFile.files[0].name;
+});
+// $('.custom-file-input').on('change',function(){
+//     alert("changement");
+// })
