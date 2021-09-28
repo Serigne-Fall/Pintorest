@@ -10,9 +10,9 @@
             {% for pin in row %}
                 <div class="col-md-4">
                     <article class="pin bg-white rounded shadow">
-                        <div class="mw-100 overflow-hidden "> 
+                        <div class="mw-100 rounded-top overflow-hidden "> 
                             <a href="{{ path('app_pins_show',{id: pin.id}) }}">
-                                <img src="{{ asset('uploads/pins/' ~ pin.imageName)| imagine_filter('squared_thumbnail_medium') }}" class="w-100 rounded-top" alt="{{ pin.title }}"/>
+                                <img src="{{ asset('uploads/pins/' ~ pin.imageName)| imagine_filter('squared_thumbnail_medium') }}" class="w-100" alt="{{ pin.title }}"/>
                             </a>
                         </div>
                         <h5 class="pl-3 pt-3"><a href="{{ path('app_pins_show',{id: pin.id}) }}" class="text-secondary text-decoration-none">{{ pin.title }}</a></h5>
