@@ -3,10 +3,31 @@
 {% block title %}Panterest !{% endblock %}
 
 {% block body %}
-    <h1>{{ pluralize(pins|length,"Pin","Pins")}}</h1>
-    {% for pin in pins %}
-        <h2><a href="{{path("app_pins_show",{id: pin.id})}}">{{ pin.title }}</a></h2>
-        <p>{{ pin.description|u.truncate(10,'...',true) }}</p>
-        <p>{{ pin.createdAt|ago }}</p>
-    {% endfor %}
+    {% if pins|length > 0 %}
+        <h1 class="mb-4 text-center text-muted">{{ pluralize(pins|length,"Pin","Pins")}}</h1>
+        {% for row in pins|batch(3) %}
+        <div class="row mb-5">
+            {% for pin in row %}
+                <div class="col-md-4">
+                    <article class="pin bg-white rounded shadow">
+                        <div class="mw-100 overflow-hidden "> 
+                            <a href="{{ path('app_pins_show',{id: pin.id}) }}">
+                                <img src="{{ asset('uploads/pins/' ~ pin.imageName)| imagine_filter('squared_thumbnail_medium') }}" class="w-100 rounded-top" alt="{{ pin.title }}"/>
+                            </a>
+                        </div>
+                        <h2><a href="{{ path('app_pins_show',{id: pin.id}) }}">{{ pin.title }}</a></h2>
+                        <p>{{ pin.description|u.truncate(10,'...',true) }}</p>
+                        <p>{{ pin.createdAt|ago }}</p>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        
+    {% else %}
+        <p class="h1 mt-5 text-center"> Aucun pin n'a été créé.<a href="{{ path('app_pins_create')}}">Creer un pin</a></p>
+    {% endif %}
 {% endblock %}
+
+
+{# # | imagine_filter('squared_thumbnail_medium')  #}

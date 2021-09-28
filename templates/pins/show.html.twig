@@ -3,7 +3,7 @@
 {% block title %} {{pin.title}} {% endblock %}
         
 {% block body %}
-        <h2>{{ pin.description }}</h2>
+        <h2>{{ pin.title }}</h2>
         <p>{{ pin.description }}</p>
         <p><a href="{{ path("app_pins_edit",{id: pin.id})}}">Edit</a> | <a href="#" onclick=" event.preventDefault(); confirm('are you sure') && document.getElementById('js-form').submit();">Delete</a> | <a href="{{ path("app_home") }}">Go back</a></p>
         

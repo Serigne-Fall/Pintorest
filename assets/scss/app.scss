@@ -32,3 +32,11 @@ html,body{
     @extend .shadow;
     @extend .img-thumbnail;
 }
+.pin img{
+    &:hover{
+        transform: scale(1.075);
+    }
+}
+.overflow-hidden{
+    overflow: hidden;
+}

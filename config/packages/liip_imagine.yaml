@@ -4,14 +4,14 @@ liip_imagine:
     driver: "gd"
 
     filter_sets :
-        squared_thumbnail_medium:
-            filters:
+        squared_thumbnail_medium :
+            filters :
                 thumbnail:
                     size: [300,300]
                     mode: outbound
                     allow_upscale: true
         squared_thumbnail_small:
-            filters:
+            filters :
                 thumbnail:
                     size: [200,200]
                     mode: outbound
