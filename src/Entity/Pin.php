@@ -54,6 +54,12 @@ class Pin
      */
     private $imageName;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pins")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $er;
+
     
 
     public function getId(): ?int
@@ -122,6 +128,18 @@ class Pin
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function getEr(): ?User
+    {
+        return $this->er;
+    }
+
+    public function setEr(?User $er): self
+    {
+        $this->er = $er;
+
+        return $this;
     }
    
 }
