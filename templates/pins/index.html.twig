@@ -15,7 +15,7 @@
                                 <img src="{{ asset('uploads/pins/' ~ pin.imageName)| imagine_filter('squared_thumbnail_medium') }}" class="w-100" alt="{{ pin.title }}"/>
                             </a>
                         </div>
-                        <h5 class="pl-3 pt-3"><a href="{{ path('app_pins_show',{id: pin.id}) }}" class="text-secondary text-decoration-none">{{ pin.title }}</a></h5>
+                        <h2 class="h5 pl-3 pt-3"><a href="{{ path('app_pins_show',{id: pin.id}) }}" class="text-secondary text-decoration-none">{{ pin.title }}</a></h2>
                         <p class="text-muted pl-3 pb-3"><small>Submitted [OWNER FULL NAME] {{ pin.createdAt|ago }}</small></p>
                     </article>
                 </div>
