@@ -16,7 +16,7 @@ class PinType extends AbstractType
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label' =>" Image (JPG, PGN or JPEG file)",
-                'required' => false,
+                'required' => true,
                 'allow_delete' => true,
                 'delete_label' => 'Delete',
                 'imagine_pattern' => 'squared_thumbnail_small',

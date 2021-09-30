@@ -8,8 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PinRepository;
 use App\Entity\Pin;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\PinType;
+use App\Repository\UserRepository;
 class PinsController extends AbstractController
 {
     /**
@@ -24,13 +26,17 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
     /**
      * @Route("/pins/create", name="app_pins_create",methods={"GET","POST"})
      */
-    public function create(Request $req,EntityManagerInterface $em):Response
+    public function create(Request $req,EntityManagerInterface $em,UserRepository $repo):Response
     {
         $pin =new Pin;
         $form= $this->createForm(PinType::class,$pin,['method' => 'POST']);
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid())
         {
+            $engi=new User();
+            $engi=$repo->findOneBy(['email'=>'engires@gmail.com']);
+            
+            $pin->setEr($engi);
             $em->persist($pin);
             $em->flush();
             

@@ -43,7 +43,6 @@ class Pin
      * 
      * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
      * @Assert\Image(maxSize="8M")
-     * @Assert\NotNull(message="Spv ! veillez chargez la photo")
      * @var File|null
      * 
      */
