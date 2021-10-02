@@ -15,7 +15,7 @@ use App\Repository\UserRepository;
 class PinsController extends AbstractController
 {
     /**
-     * @Route("/pins", name="app_home")
+     * @Route("/", name="app_home")
      */
 public function index(EntityManagerInterface $em,PinRepository $repo): Response
     {
