@@ -54,7 +54,7 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $user->setPassword(
-                $passwordEncoder->encodePassword($user,$form['newPassword']->getData())
+                $passwordEncoder->encodePassword($user,$form['plainPassword']->getData())
             );
              $em->flush();
              $this->addFlash('success','Password changed SuccessFully');
