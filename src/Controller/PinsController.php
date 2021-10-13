@@ -33,10 +33,10 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid())
         {
-            $engi=new User();
-            $engi=$repo->findOneBy(['email'=>'engires@gmail.com']);
+            $user_pin=new User();
+            $user_pin=$repo->find($this->getUser()->getId());
             
-            $pin->setEr($engi);
+            $pin->setEr($user_pin);
             $em->persist($pin);
             $em->flush();
             
@@ -53,7 +53,19 @@ public function index(EntityManagerInterface $em,PinRepository $repo): Response
      */
     public function show(Pin $pin):Response
     {
-        return $this->render("pins/show.html.twig",compact("pin"));
+        if($this->getUser()){
+            if($pin->getEr()==$this->getUser()){
+                return $this->render("pins/show.html.twig",compact("pin"));
+            }else{
+                $this->addFlash('error','Vous n\'avez pas le droit de voir les details ou de  modifier cette photo');
+                return $this->redirectToRoute("app_home");
+            }
+            
+        }else{
+            $this->addFlash('error','Pour voir les details du photo ou de modifier vous devez vous connecter dabord');
+            return $this->redirectToRoute("app_home");
+        }
+        
     }
 
 
